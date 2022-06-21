@@ -69,10 +69,10 @@ const scrapeData = () => {
     console.log(marketwatchTime);
 
     // scrape equity and balance
-    const [element] = await page.$x(
-      "/html/body/div[6]/div[3]/table/tbody/tr[5]/td[1]/div/span"
+    let price = await page.$eval(
+      "body > div.page-block.frame.bottom > div:nth-child(3) > table > tbody > tr > td.iconed > div > span",
+      (el) => el.textContent
     );
-    const price = await page.evaluate((element) => element.innerText, element);
     console.log(price);
 
     // clean scraped data
