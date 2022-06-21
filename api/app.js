@@ -10,13 +10,13 @@ const errorHandler = require("./middleware/error-handler");
 const notFound = require("./middleware/not-found");
 
 // MiddleWares
-app.use(express.json); // express body parser
+app.use(express.json()); // express body parser
 app.use(express.urlencoded({ extended: true }));
-// app.use(cors());
+app.use(cors());
 
 const homepage = require("./routes/Home");
 // Route
-app.use("/", homepage);
+app.use(homepage);
 
 // errors middleware
 app.use(errorHandler);

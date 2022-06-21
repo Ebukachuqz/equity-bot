@@ -47,14 +47,7 @@ const scrapeData = () => {
       fullPage: false,
     });
 
-    await page.waitForSelector(
-      "body > div.page-window.market-watch.compact > div > div.b > div.page-block > div > table > tbody > tr:nth-child(1) > td.symbol"
-    );
-    // wait for an element that needs internet to load to be sure there is internet connection before scraping
-    await page.waitForXPath(
-      "/html/body/div[5]/div/div[3]/div[1]/div/table/tbody/tr[1]/td[1]"
-    );
-    await page.waitForTimeout(10000); // wait an extra 10secs for page to load fully
+    await page.waitForTimeout(15000); // wait for 15secs for page to load fully
     await page.screenshot({
       path: "./screenshots/navigation-page.png",
       fullPage: false,
