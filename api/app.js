@@ -13,10 +13,19 @@ const notFound = require("./middleware/not-found");
 app.use(express.json()); // express body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET");
+  next();
+});
 
 const homepage = require("./routes/Home");
 // Route
-app.use(homepage);
+app.use("/api", homepage);
 
 // errors middleware
 app.use(errorHandler);

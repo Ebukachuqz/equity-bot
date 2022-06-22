@@ -11,6 +11,11 @@ const ScrappedDataSchema = new mongoose.Schema({
     required: true,
   },
 
+  currency: {
+    type: String,
+    required: true,
+  },
+
   marketwatchTime: {
     type: String,
     required: true,
