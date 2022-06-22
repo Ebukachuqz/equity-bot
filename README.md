@@ -6,7 +6,7 @@ Equity Bot is a web scrapper that logs into a MT4 account on (https://trade.mql5
 
 ## Technologies Used
 
-- Frontend: React Js
+- Frontend: React Js & Material UI
 - Backend: Node/Express Js
 - Database: MongoDB
 
