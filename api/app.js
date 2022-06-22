@@ -13,18 +13,9 @@ const notFound = require("./middleware/not-found");
 app.use(express.json()); // express body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET");
-  next();
-});
 
-const homepage = require("./routes/Home");
 // Route
+const homepage = require("./routes/Home");
 app.use("/api", homepage);
 
 // errors middleware
@@ -37,7 +28,7 @@ const startApp = async () => {
   await connectDB(process.env.MONGO_URI);
   app.listen(port, () => console.log(`app is listening on ${port}`));
   scrapeData(); // initial call to scrape data as server fires up
-  setInterval(scrapeData, 60000); // scrape data every 5mins
+  setInterval(scrapeData, 300000); // scrape data every 5mins
 };
 
 startApp();
