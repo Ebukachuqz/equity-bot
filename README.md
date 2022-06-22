@@ -21,7 +21,7 @@ N.B: Make sure to have Nodejs, git(if you are going to clone the repo) installed
 - Create a .env file and provide all environment variables needed (as seen in .env.sample file)
 - Then in the terminal, type `npm run devStart` and hit enter to the start server in developement mode
 
-  CLIENT
+    CLIENT
 
 - After you must have started the server, open another terminal and navigate to the client folder
 - run `npm install` to install all dependencies
