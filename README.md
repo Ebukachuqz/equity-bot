@@ -33,7 +33,7 @@ N.B: Make sure to have Nodejs, git(if you are going to clone the repo) installed
 ### Live link to api
 https://equity-bot-scrapper.herokuapp.com/api
 
-Both frontend and backend were hosted on **HEROKU**
+Both frontend and backend are hosted on **HEROKU**
 
 ## Author
 
