@@ -27,6 +27,14 @@ N.B: Make sure to have Nodejs, git(if you are going to clone the repo) installed
 - run `npm install` to install all dependencies
 - Then in the terminal, type `npm start` and hit enter to start the client side
 
+### Live Link to project 
+(https://equity-bot-scrapper.herokuapp.com/)
+
+### Live link to api
+https://equity-bot-scrapper.herokuapp.com/api
+
+Both frontend and backend were hosted on **HEROKU**
+
 ## Author
 
 Ebuka Chuqz
