@@ -14,10 +14,15 @@ app.use(express.json()); // express body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, "/client/build")));
+
 // Route
 const homepage = require("./routes/Home");
 app.use("/api", homepage);
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
 // errors middleware
 app.use(errorHandler);
 app.use(notFound);
