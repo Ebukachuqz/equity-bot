@@ -16,20 +16,22 @@ const puppeteer = require("puppeteer-extra");
 
 // add stealth plugin
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
+const { text } = require("express");
 puppeteer.use(StealthPlugin());
 
-const scrapeData = () => {
-  // launch puppeteer
-  puppeteer
-    .launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    })
-    .then(async (browser) => {
-      console.log("Puppeteer Has launched...");
-      const page = await browser.newPage();
-      await page.setDefaultNavigationTimeout(120000); // set default timeout to 2mins
-      try {
+const scrapeData = async () => {
+  try {
+    // launch puppeteer
+    puppeteer
+      .launch({
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        slowMo: 800,
+      })
+      .then(async (browser) => {
+        console.log("Puppeteer Has launched...");
+        const page = await browser.newPage();
+        await page.setDefaultNavigationTimeout(120000); // set default timeout to 2mins
         await page.goto(baseUrl, { waitUntil: "load", timeout: 120000 });
         // wait for the login form to be rendered before proceeding
         await page.waitForSelector("#login");
@@ -61,20 +63,28 @@ const scrapeData = () => {
         });
 
         // scrape marketwatch
-        let marketwatchTime = await page.$eval(
-          "body > div.page-window.market-watch.compact > div > div.h",
-          (el) => el.textContent
+        let [marketwatchTime] = await page.$x("/html/body/div[5]/div/div[1]");
+        marketwatchTime = await page.evaluate(
+          (el) => el.textContent,
+          marketwatchTime
         );
+
         marketwatchTime = marketwatchTime.split(" ")[2];
         console.log(marketwatchTime);
 
         // scrape equity and balance
         let price = await page.$eval(
-          "body > div.page-block.frame.bottom > div:nth-child(3) > table > tbody > tr.total > td.iconed > div > span",
-          (el) => el.textContent
+          "body > div.page-block.frame.bottom > div:nth-child(3) > table > tbody > tr.total > td.iconed > div",
+          (el) => el.innerText
         );
-
+        // let [price] = await page.$x(
+        //   "/html/body/div[6]/div[3]/table/tbody/tr[4]/td[1]/div/span"
+        // );
         console.log(price);
+        // price = await price.getProperty("textContent");
+        // console.log(price, "prps");
+        // price = await text.jsonValue();
+        // console.log(price, "text json value");
 
         // clean scraped data
         let priceList = price.split(" ");
@@ -86,15 +96,23 @@ const scrapeData = () => {
         // Sava data to Database
         const scrappedData = { balance, equity, currency, marketwatchTime };
         const data = await ScrappedData.create({ ...scrappedData });
-        console.log("Data added to db", data);
+        console.log("Data added to db");
 
         // close browser
         await browser.close();
         console.log(`All done, check the screenshot.`);
-      } catch (error) {
-        console.log("Opps! Puppeteer", error);
-      }
-    });
+        return data;
+      });
+  } catch (error) {
+    console.log(
+      "Puppeteer selector error, selector path as been changed again, check ur code and change selector",
+      error
+    );
+    let data = await ScrappedData.find().sort({ $natural: -1 }).limit(1);
+    data = data[0];
+    console.log("extracted data from db");
+    return data;
+  }
 };
 
 module.exports = { scrapeData };
