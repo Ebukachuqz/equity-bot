@@ -30,11 +30,11 @@ You can visit the api on http://localhost:8080/api
 
 ### Live Link to DashBoard
 
-https://equity-bot-scrapper.herokuapp.com/
+https://equitybot-scrapper.herokuapp.com/
 
 ### Live link to api
 
-https://equity-bot-scrapper.herokuapp.com/api
+https://equitybot-scrapper.herokuapp.com/api
 
 Both frontend and backend are hosted on **HEROKU**
 
