@@ -22,7 +22,7 @@ const scrapeData = () => {
   // launch puppeteer
   puppeteer
     .launch({
-      headless: false,
+      headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     })
     .then(async (browser) => {
@@ -54,16 +54,7 @@ const scrapeData = () => {
           fullPage: false,
         });
 
-        // wait for price section to mount
-        await page.waitForSelector(
-          "body > div.page-window.market-watch.compact > div > div.b > div.page-block > div > table > tbody > tr:nth-child(1) > td.symbol"
-        );
-        // wait for an element that needs internet to load to be sure there is internet connection before scraping
-        await page.waitForSelector(
-          "body > div.page-block.frame.bottom > div:nth-child(3) > table > tbody > tr:nth-child(1) > td.iconed > div > span"
-        );
-
-        await page.waitForTimeout(5000); // wait for extra 5secs for page to load fully. Just being careful
+        await page.waitForTimeout(10000); // wait for 10secs for page to load fully.
         await page.screenshot({
           path: "./screenshots/navigation-page.png",
           fullPage: false,

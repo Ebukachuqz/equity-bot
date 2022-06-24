@@ -2,6 +2,7 @@ require("dotenv").config();
 require("express-async-errors");
 const express = require("express");
 const app = express();
+const path = require("path");
 
 const connectDB = require("./db/connectDB");
 const cors = require("cors");
@@ -14,6 +15,7 @@ app.use(express.json()); // express body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+// using client/build as express static file for backend
 app.use(express.static(path.join(__dirname, "/client/build")));
 
 // Route
