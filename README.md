@@ -25,10 +25,8 @@ N.B: Make sure to have Nodejs, git(if you would be cloning the repo) installed l
 - Finally in the client directory, navigate out of it and into the api directory
 - Then in the terminal, type `npm run devStart` and hit enter to run the app locally
 
-<<<<<<< HEAD
 N.B: The app runs on http://localhost:8080/
 You can visit the api on http://localhost:8080/api
-=======
 
 ### Live Link to DashBoard
 
