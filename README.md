@@ -17,15 +17,26 @@ N.B: Make sure to have Nodejs, git(if you are going to clone the repo) installed
     SERVER
 
 - Clone this repo with `git clone https://github.com/Ebukachuqz/equity-bot.git` or download the zip file
-- Navigate to the **api** folder and run `npm install` in terminal, to install all dependencies
-- Create a .env file and provide all environment variables needed (as seen in .env.sample file)
-- Then in the terminal, type `npm run devStart` and hit enter to the start server in developement mode
+- In the terminal, Navigate to the **api** folder and run `npm install` to install all dependencies
+- Create a .env file and provide all environment variables needed using .env.sample file as a guide.
+- Then Navigate into the **client** folder and run `npm install` in the terminal, to install all dependencies for the client side.
+- Then in the client folder, run `npm run build` in the terminal to create a build directory with a client production build of the app.
+  N.B: This is very important as express middleware in the server connects to the build file as its static file.
+- Finally in the client directory, navigate out of it and into the api directory
+- Then in the terminal, type `npm run devStart` and hit enter to run the app locally
 
-  CLIENT
+N.B: The app runs on http://localhost:8080/
+You can visit the api on http://localhost:8080/api
 
-- After you must have started the server, open another terminal and navigate to the client folder
-- run `npm install` to install all dependencies
-- Then in the terminal, type `npm start` and hit enter to start the client side
+### Live Link to DashBoard
+
+https://equity-bot-scrapper.herokuapp.com/
+
+### Live link to api
+
+https://equity-bot-scrapper.herokuapp.com/api
+
+Both frontend and backend are hosted on **HEROKU**
 
 ## Author
 
