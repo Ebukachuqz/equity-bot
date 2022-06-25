@@ -35,7 +35,7 @@ const startApp = async () => {
   await connectDB(process.env.MONGO_URI);
   app.listen(port, () => console.log(`app is listening on ${port}`));
   scrapeData(); // initial call to scrape data as server fires up
-  setInterval(scrapeData, 300000); // scrape data every 5mins
+  setInterval(() => scrapeData(), 300000); // scrape data every 5mins
 };
 
 startApp();

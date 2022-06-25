@@ -1,4 +1,5 @@
-import { axiosInstance } from "../config";
+import React from "react";
+import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -10,7 +11,7 @@ const useFetch = () => {
   // query server for data function
   const getData = async () => {
     setLoading(true);
-    const response = await axiosInstance.get("/api");
+    const response = await axios.get("/api");
     const result = response.data;
     setData(result[0]);
     setLoading(false);

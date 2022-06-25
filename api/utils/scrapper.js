@@ -26,7 +26,7 @@ const scrapeData = async () => {
       .launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        slowMo: 800,
+        slowMo: 900,
       })
       .then(async (browser) => {
         console.log("Puppeteer Has launched...");
@@ -74,7 +74,7 @@ const scrapeData = async () => {
 
         // scrape equity and balance
         let price = await page.$eval(
-          "body > div.page-block.frame.bottom > div:nth-child(3) > table > tbody > tr.total > td.iconed > div",
+          "body > div.page-block.frame.bottom > div:nth-child(3) > table > tbody > tr.total > td.iconed > div > span",
           (el) => el.innerText
         );
         // let [price] = await page.$x(
@@ -101,17 +101,12 @@ const scrapeData = async () => {
         // close browser
         await browser.close();
         console.log(`All done, check the screenshot.`);
-        return data;
       });
   } catch (error) {
     console.log(
       "Puppeteer selector error, selector path as been changed again, check ur code and change selector",
       error
     );
-    let data = await ScrappedData.find().sort({ $natural: -1 }).limit(1);
-    data = data[0];
-    console.log("extracted data from db");
-    return data;
   }
 };
 
